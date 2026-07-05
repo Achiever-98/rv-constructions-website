@@ -1,0 +1,5 @@
+User-agent: *
+
+Allow: /
+
+Sitemap: https://rv-constructions.pages.dev/sitemap.xml
