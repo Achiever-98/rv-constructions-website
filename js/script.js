@@ -13,21 +13,21 @@ window.addEventListener("DOMContentLoaded", () => {
 
     window.addEventListener("scroll", () => {
 
-        if (window.scrollY > 80) {
+    if (window.scrollY > 80) {
 
-            navbar.style.background = "#080808";
-            navbar.style.padding = "12px 0";
-            navbar.style.boxShadow = "0 8px 25px rgba(0,0,0,.35)";
+        navbar.style.background = "#080808";
+        navbar.style.padding = "12px 0";
+        navbar.style.boxShadow = "0 8px 25px rgba(0,0,0,.35)";
 
-        } else {
+    } else {
 
-            navbar.style.background = "rgba(0,0,0,.85)";
-            navbar.style.padding = "18px 0";
-            navbar.style.boxShadow = "none";
+        navbar.style.background = "rgba(0,0,0,.85)";
+        navbar.style.padding = "18px 0";
+        navbar.style.boxShadow = "none";
 
-        }
+    }
 
-    });
+});
 
     /* ===============================
        BACK TO TOP BUTTON
@@ -98,61 +98,62 @@ window.addEventListener("DOMContentLoaded", () => {
 
     fadeElements.forEach(item => observer.observe(item));
 
-    /* ===============================
-       COUNTER ANIMATION
-    =============================== */
+/* ===============================
+   COUNTER ANIMATION
+=============================== */
 
-    const counters = document.querySelectorAll(".stats h2");
+console.log("Counter started");
 
-    const speed = 60;
+const counters = document.querySelectorAll(".stats h2");
 
-    counters.forEach(counter => {
+console.log(counters);
 
-        const animate = () => {
+const counterObserver = new IntersectionObserver((entries) => {
 
-            const target = parseInt(counter.innerText);
+    entries.forEach(entry => {
 
-            const count = +counter.getAttribute("data-count") || 0;
+        if (!entry.isIntersecting) return;
 
-            const increment = Math.ceil(target / speed);
+        const counter = entry.target;
+
+        const target = Number(counter.dataset.target);
+        const symbol = counter.dataset.symbol;
+
+        let count = 0;
+        const increment = Math.ceil(target / 60);
+
+        function updateCounter() {
+
+            count += increment;
 
             if (count < target) {
 
-                counter.setAttribute(
+                counter.innerText = count + symbol;
 
-                    "data-count",
-
-                    count + increment
-
-                );
-
-                counter.innerText = Math.min(
-
-                    count + increment,
-
-                    target
-
-                ) +
-
-                (counter.innerText.includes("%") ? "%" : "+");
-
-                requestAnimationFrame(animate);
+                requestAnimationFrame(updateCounter);
 
             } else {
 
-                counter.innerText = target +
-
-                (counter.innerText.includes("%") ? "%" : "+");
+                counter.innerText = target + symbol;
 
             }
 
-        };
+        }
 
-        animate();
+        updateCounter();
+
+        counterObserver.unobserve(counter);
 
     });
 
+}, {
+    threshold: 0.5
 });
+
+counters.forEach(counter => counterObserver.observe(counter));
+
+});
+
 
 /* ======================================
    ACTIVE NAVIGATION
@@ -240,7 +241,15 @@ buttons.forEach(btn => {
 
 window.addEventListener("load", () => {
 
-    document.body.classList.add("loaded");
+    const preloader = document.getElementById("preloader");
+
+    setTimeout(() => {
+
+        preloader.style.opacity = "0";
+
+        preloader.style.visibility = "hidden";
+
+    }, 800);
 
 });
 
@@ -254,6 +263,45 @@ console.log("%c🏗 RV Constructions & Consultancy",
 console.log("%cWebsite Developed by Mithun R.",
 "color:white;font-size:14px;");
 
+
+
+
+/* ===============================
+   CONTACT FORM - WHATSAPP
+=============================== */
+
+const contactForm = document.getElementById("contactForm");
+
+if (contactForm) {
+
+    contactForm.addEventListener("submit", function(e){
+
+        e.preventDefault();
+
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const phone = document.getElementById("phone").value;
+        const message = document.getElementById("message").value;
+
+        const text =
+`Hello RV Constructions,
+
+Name: ${name}
+Email: ${email}
+Phone: ${phone}
+
+Message:
+${message}`;
+
+        window.open(
+            `https://wa.me/917846071360?text=${encodeURIComponent(text)}`,
+            "_blank"
+        );
+
+    });
+
+}
+
 /* ======================================
    FUTURE FEATURES
 ====================================== */
@@ -266,6 +314,12 @@ console.log("%cWebsite Developed by Mithun R.",
 // Project Filter
 // Blog
 // Admin Dashboard
+
+const lightbox = GLightbox({
+    selector: ".glightbox"
+});
+
+
 
 /* ======================================
    END OF SCRIPT.JS
