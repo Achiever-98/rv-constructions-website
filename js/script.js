@@ -72,10 +72,15 @@ window.addEventListener("DOMContentLoaded", () => {
     =============================== */
 
     const fadeElements = document.querySelectorAll(
-
-        ".service-card, .project-card, .gallery-img, .testimonial-card, .why-box"
-
+        ".service-card,\
+        .project-card,\
+        .gallery-img,\
+        .testimonial-card,\
+        .why-box,\
+        .process-card,\
+        .stats-card"
     );
+    
 
     const observer = new IntersectionObserver((entries) => {
 

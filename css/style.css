@@ -96,14 +96,17 @@ box-shadow:0 8px 20px rgba(0,0,0,.25);
 }
 
 .navbar .container{
-
-display:flex;
-align-items:center;
+    display:flex;
+    align-items:center;
 
 }
 
 .navbar-brand{
     color:white !important;
+    display:flex;
+    align-items:center;
+    padding:0;
+    margin:0;
 
 }
 
@@ -115,14 +118,15 @@ LOGO
 
     display:flex;
     align-items:center;
+    justify-content:center;
     gap: 15px;
 
 }
 
 .logo-icon{
 
-    width:60px;
-    height:60px;
+    width:55px;
+    height:55px;
     border-radius:50%;
     background:linear-gradient(135deg,#D4AF37,#B8860B);
     display:flex;
@@ -136,16 +140,12 @@ LOGO
 }
 
 .logo-text{
-
-display:flex;
-
-flex-direction:column;
-
-justify-content:center;
-
-margin-left:12px;
-
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    margin-left:12px;
 }
+
 
 .logo-text h3{
 
@@ -498,6 +498,8 @@ transform:translateY(0);
     overflow:visible;
     text-align:center;
     transition:all .4s ease;
+    opacity:0;
+    transform:translateY(40px);
 
 }
 
@@ -578,7 +580,9 @@ margin-top:12px;
     border-radius:15px;
     margin-bottom:20px;
     border-left:4px solid var(--primary);
-    transition:.35s;
+    opacity:0;
+    transform:translateY(40px);
+    transition:.8s;
 
 }
 
@@ -599,6 +603,13 @@ margin-top:12px;
 
 }
 
+.why-box.show{
+    opacity:1;
+    transform:translateY(0);
+    box-shadow:0 15px 35px rgba(0,0,0,.2);
+}
+
+
 /*======================================
  ACHIEVEMENTS
 ======================================*/
@@ -615,11 +626,18 @@ margin-top:12px;
     padding:25px 15px;
     margin-bottom:15px;
     height:100%;
-    transition:.35s;
     min-height:220px;
     display:flex;
     flex-direction:column;
     justify-content:center;
+    opacity:0;
+    transform:translateY(40px);
+    transition:.8s;
+}
+
+.stats-card.show{
+    opacity:1;
+    transform:translateY(0);
 }
 
 .stats-card:hover{
@@ -667,8 +685,16 @@ margin-top:12px;
     overflow:hidden;
     border-radius:18px;
     border:1px solid #2a2a2a;
-    transition:.4s;
     margin-bottom:25px;
+    opacity:0;
+    transform:translateY(40px);
+    transition:.8s;
+}
+
+.project-card.show{
+    opacity:1;
+    transform:translateY(0);
+
 }
 
 .project-image{
@@ -751,6 +777,8 @@ margin-top:12px;
     margin-bottom:25px;
 
     transition:.4s;
+    opacity:0;
+    transform:scale(.9);
 
 }
 
@@ -1023,9 +1051,9 @@ footer p{
     height:55px;
     border:none;
     border-radius:50%;
-    background:linear-gradient(135deg,#d4af37,#f7d774);
+    background:#d4af37;
     color:#111;
-    box-shadow:0 10px 25px rgba(212,175,55,.4);
+    box-shadow:0 8px 20px rgba(212,175,55,.25);
     font-size:22px;
     cursor:pointer;
     display:none;
@@ -1036,7 +1064,8 @@ footer p{
 
 #topBtn:hover{
     transform:translateY(-5px);
-    box-shadow:0 15px 30px rgba(212,175,55,.6);
+    background:#f7d774;
+    box-shadow:0 12px 24px rgba(212,175,55,.4);
 
 }
 
@@ -1272,6 +1301,16 @@ font-size:18px;
 .service-card{
 
 padding:30px;
+opacity:0;
+    transform:translateY(40px);
+
+}
+
+.service-card.show{
+
+opacity:1;
+
+transform:translateY(0);
 
 }
 
@@ -1288,10 +1327,17 @@ height:220px;
 }
 
 .gallery-img{
-
-height:230px;
-
+    height:230px;
+    opacity:0;
+    transform:scale(.9);
+    transition:.8s;
 }
+
+.gallery-img.show{
+opacity:1;
+transform:scale(1);
+}
+
 
 .cta{
 
@@ -1676,7 +1722,7 @@ HOME HERO SLIDER
 
 .hero-slider-img{
 
-height:300px;
+height:350px;
 
 }
 
@@ -2401,7 +2447,7 @@ width:100%;
 
 .hero-slider-img{
 
-height:260px;
+height:350px;
 
 object-fit:cover;
 
@@ -2490,12 +2536,11 @@ font-size:17px;
 }
 
 .service-card{
-
 padding:20px;
-
 margin-bottom:20px;
-
 border-radius:15px;
+opacity:0;
+transform:translateY(40px);
 
 }
 
@@ -2605,7 +2650,21 @@ background:#d4af37;
 
 }
 
+.contact a{
 
+color:inherit;
+
+text-decoration:none;
+
+transition:.3s;
+
+}
+
+.contact a:hover{
+
+color:#d4af37;
+
+}
 
 /*======================================
  END OF STYLE.CSS
