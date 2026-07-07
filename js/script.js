@@ -320,6 +320,27 @@ const lightbox = GLightbox({
 });
 
 
+/* ======================================
+   CLOSE MOBILE MENU AFTER CLICK
+====================================== */
+
+const navItems = document.querySelectorAll(".navbar-nav .nav-link");
+const navCollapse = document.querySelector(".navbar-collapse");
+
+navItems.forEach(item => {
+
+    item.addEventListener("click", () => {
+
+        if (navCollapse.classList.contains("show")) {
+
+            new bootstrap.Collapse(navCollapse).hide();
+
+        }
+
+    });
+
+});
+
 
 /* ======================================
    END OF SCRIPT.JS
