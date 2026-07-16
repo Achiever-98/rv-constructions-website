@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout Source') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Print Workspace') {
+            steps {
+                sh '''
+                    echo "Current Directory:"
+                    pwd
+
+                    echo ""
+                    echo "Workspace Files:"
+                    ls -la
+
+                    echo ""
+                    echo "App Folder:"
+                    ls -la app
+                '''
+            }
+        }
+
+    }
+}
