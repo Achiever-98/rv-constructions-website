@@ -28,6 +28,8 @@
 
 <link rel="stylesheet" href="css/style.css">
 
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
@@ -95,9 +97,7 @@ data-bs-toggle="collapse"
 
 data-bs-target="#navbarNav">
 
-<span class="navbar-toggler-icon">
-
-</span>
+<i class="fa-solid fa-bars"></i>
 
 </button>
 
@@ -136,6 +136,45 @@ id="navbarNav">
 
 </nav>
 
+
+<!-- ===========================
+     BREADCRUMB
+=========================== -->
+
+<section class="breadcrumb-section">
+
+    <div class="container">
+
+        <nav aria-label="breadcrumb">
+
+            <ol class="breadcrumb justify-content-center">
+
+                <li class="breadcrumb-item">
+
+                    <a href="index.html">Home</a>
+
+                </li>
+
+                <li class="breadcrumb-item">
+
+                    <a href="index.html#services">Services</a>
+
+                </li>
+
+                <li class="breadcrumb-item active">
+
+                    Building Construction
+
+                </li>
+
+            </ol>
+
+        </nav>
+
+    </div>
+
+</section>
+
 <!-- ===========================
      HERO
 =========================== -->
@@ -152,7 +191,12 @@ id="navbarNav">
 
 <h5 class="gold-text">
 
-WELCOME TO
+WELCOME TO 
+
+<p class="hero-company">
+    <span class="hero-rv">RV</span>
+    <span class="hero-name">Constructions & Consultancy</span>
+</p>
 
 </h5>
 
@@ -294,53 +338,90 @@ Call Now
      ABOUT
 =========================== -->
 
-<section
-id="about"
-
-class="about">
+<section id="about" class="about">
 
 <div class="container">
 
-<div class="row align-items-center">
+<div class="row align-items-center g-5">
 
-<div class="col-lg-6">
+    <!-- Image -->
 
-<img
-src="images/about/about.jpg"
+    <div class="col-lg-5 text-center">
 
-class="img-fluid rounded shadow">
+        <img src="images/about/about.jpg"
+             class="img-fluid rounded shadow about-img"
+             alt="RV Constructions">
 
-</div>
+    </div>
 
-<div class="col-lg-6">
+    <!-- Content -->
 
-<h2 class="section-title">
+    <div class="col-lg-7">
 
-About RV Constructions
+        <h2 class="section-title about-title">
+            <span>About</span>
+            <strong>RV Constructions & Consultancy</strong>
+        </h2>
 
-</h2>
+        <p>
+            <strong>RV Constructions & Consultancy</strong> is a trusted
+            construction company committed to delivering quality,
+            durability and customer satisfaction. We believe every
+            project is more than just a building—it's a dream brought
+            to life with expert planning, engineering excellence and
+            professional execution.
+        </p>
 
-<p>
+        <p>
+            Our team focuses on creating residential homes,
+            commercial buildings and civil engineering projects that
+            combine strength, functionality and modern design.
+            Every project is executed using quality materials,
+            skilled workmanship and strict quality standards.
+        </p>
 
-RV Constructions & Consultancy is a growing construction company founded with the vision of delivering quality workmanship, honest consultation and customer satisfaction.
+        <p>
+            From the first consultation to the final handover,
+            we maintain complete transparency, timely execution
+            and clear communication. Our goal is to build long-term
+            relationships by delivering projects that exceed customer
+            expectations in quality, safety and value.
+        </p>
 
-</p>
+        <!-- Highlights -->
 
-<p>
+        <div class="about-highlights">
 
-From residential homes to commercial projects, we focus on timely delivery, quality materials and engineering excellence.
+            <div>
+                <i class="fa-solid fa-circle-check"></i>
+                Trusted Construction Partner
+            </div>
 
-</p>
+            <div>
+                <i class="fa-solid fa-circle-check"></i>
+                Premium Quality Workmanship
+            </div>
 
-<a href="#contact"
+            <div>
+                <i class="fa-solid fa-circle-check"></i>
+                Transparent Communication
+            </div>
 
-class="btn btn-gold">
+            <div>
+                <i class="fa-solid fa-circle-check"></i>
+                On-Time Project Delivery
+            </div>
 
-Get Free Consultation
+        </div>
 
-</a>
+        <div class="text-center mt-5">
+            <a href="#contact" class="btn btn-gold px-5 py-3">
+                Get Free Consultation
+            </a>
+        </div>
+        
 
-</div>
+    </div>
 
 </div>
 
@@ -425,12 +506,12 @@ Our Services
 
     <div class="col-lg-4 col-md-6">
 
+    <a href="building-construction.html" class="service-link">
+
     <div class="service-card">
     
-
     <img src="images/services/service1.jpg" class="service-img" alt="Building Construction">
     
-
     <p>
             
     </p>         
@@ -444,10 +525,13 @@ Our Services
 
     </div>
 
+    </a>
+
 </div>
 
 <div class="col-lg-4 col-md-6">
 
+    <a href="planning.html" class="service-link">
     <div class="service-card">
 
 
@@ -465,6 +549,7 @@ Our Services
         </p>
 
     </div>
+    </a>
 
 </div>
 
