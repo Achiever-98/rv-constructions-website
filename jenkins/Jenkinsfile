@@ -45,5 +45,15 @@ pipeline {
                 }
             }
         }
+
+        stage('JavaScript Validation') {
+            steps {
+                sh '''
+                    eslint app/js/*.js \
+                    --config lint/.eslintrc.json || true
+                '''
+            }
+        }
+
     }
 }
