@@ -78,6 +78,26 @@ pipeline {
             }
         }
 
+        stage('Docker Debug') {
+            steps {
+                sh '''
+                echo "Current User:"
+                whoami
+
+                echo ""
+                id
+
+                echo ""
+                ls -l /var/run/docker.sock
+
+                echo ""
+                docker version || true
+
+                echo ""
+                docker ps || true
+            '''
+            }
+        }
 
         stage('Build Docker Image') {
             steps {
@@ -101,6 +121,5 @@ pipeline {
                 '''
             }
         }
-
     }
 }
