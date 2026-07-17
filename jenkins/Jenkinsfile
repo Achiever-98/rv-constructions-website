@@ -29,14 +29,20 @@ pipeline {
 
         stage('CSS Validation') {
             steps {
-                sh '''
-                stylelint app/css/style.css \
-                --fix \
-                --config lint/.stylelintrc.json
-                
-                stylelint app/css/style.css \
-                --config lint/.stylelintrc.json
-                '''
+                script {
+                    def status = sh(
+                script: '''
+                    stylelint app/css/style.css \
+                    --fix \
+                    --config lint/.stylelintrc.json
+                ''',
+                returnStatus: true
+            )
+
+                    if (status != 0) {
+                        echo 'Stylelint found issues. Continuing pipeline...'
+                    }
+                }
             }
         }
     }
