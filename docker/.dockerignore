@@ -1,0 +1,15 @@
+.git
+.gitignore
+
+jenkins/
+k8s/
+sonar/
+lint/
+docs/
+scripts/
+
+README.md
+LICENSE
+
+node_modules
+.scannerwork
