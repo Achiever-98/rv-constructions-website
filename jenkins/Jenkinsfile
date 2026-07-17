@@ -26,5 +26,13 @@ pipeline {
             }
         }
 
+        stage('HTML Validation') {
+            steps {
+                sh '''
+                htmlhint app/*.html --config lint/.htmlhintrc
+                '''
+            }
+        }
+
     }
 }
