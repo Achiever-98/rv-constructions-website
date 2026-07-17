@@ -28,5 +28,14 @@ pipeline {
             }
         }
 
+        stage('CSS Validation') {
+            steps {
+                sh '''
+                stylelint "app/css/*.css" \
+                --config lint/.stylelintrc.json
+                '''
+                }
+            }
+
     }
 }
