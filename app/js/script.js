@@ -13,21 +13,21 @@ window.addEventListener("DOMContentLoaded", () => {
 
     window.addEventListener("scroll", () => {
 
-    if (window.scrollY > 80) {
+        if (window.scrollY > 80) {
 
-        navbar.style.background = "#080808";
-        navbar.style.padding = "12px 0";
-        navbar.style.boxShadow = "0 8px 25px rgba(0,0,0,.35)";
+            navbar.style.background = "#080808";
+            navbar.style.padding = "12px 0";
+            navbar.style.boxShadow = "0 8px 25px rgba(0,0,0,.35)";
 
-    } else {
+        } else {
 
-        navbar.style.background = "rgba(0,0,0,.85)";
-        navbar.style.padding = "18px 0";
-        navbar.style.boxShadow = "none";
+            navbar.style.background = "rgba(0,0,0,.85)";
+            navbar.style.padding = "18px 0";
+            navbar.style.boxShadow = "none";
 
-    }
+        }
 
-});
+    });
 
     /* ===============================
        BACK TO TOP BUTTON
@@ -65,7 +65,7 @@ window.addEventListener("DOMContentLoaded", () => {
        SMOOTH SCROLL
     =============================== */
 
- 
+
 
     /* ===============================
        SCROLL ANIMATION
@@ -80,7 +80,7 @@ window.addEventListener("DOMContentLoaded", () => {
         .process-card,\
         .stats-card"
     );
-    
+
 
     const observer = new IntersectionObserver((entries) => {
 
@@ -103,59 +103,59 @@ window.addEventListener("DOMContentLoaded", () => {
 
     fadeElements.forEach(item => observer.observe(item));
 
-/* ===============================
-   COUNTER ANIMATION
-=============================== */
+    /* ===============================
+       COUNTER ANIMATION
+    =============================== */
 
-console.log("Counter started");
+    console.log("Counter started");
 
-const counters = document.querySelectorAll(".stats h2");
+    const counters = document.querySelectorAll(".stats h2");
 
-console.log(counters);
+    console.log(counters);
 
-const counterObserver = new IntersectionObserver((entries) => {
+    const counterObserver = new IntersectionObserver((entries) => {
 
-    entries.forEach(entry => {
+        entries.forEach(entry => {
 
-        if (!entry.isIntersecting) return;
+            if (!entry.isIntersecting) return;
 
-        const counter = entry.target;
+            const counter = entry.target;
 
-        const target = Number(counter.dataset.target);
-        const symbol = counter.dataset.symbol;
+            const target = Number(counter.dataset.target);
+            const symbol = counter.dataset.symbol;
 
-        let count = 0;
-        const increment = Math.ceil(target / 60);
+            let count = 0;
+            const increment = Math.ceil(target / 60);
 
-        function updateCounter() {
+            function updateCounter() {
 
-            count += increment;
+                count += increment;
 
-            if (count < target) {
+                if (count < target) {
 
-                counter.innerText = count + symbol;
+                    counter.innerText = count + symbol;
 
-                requestAnimationFrame(updateCounter);
+                    requestAnimationFrame(updateCounter);
 
-            } else {
+                } else {
 
-                counter.innerText = target + symbol;
+                    counter.innerText = target + symbol;
+
+                }
 
             }
 
-        }
+            updateCounter();
 
-        updateCounter();
+            counterObserver.unobserve(counter);
 
-        counterObserver.unobserve(counter);
+        });
 
+    }, {
+        threshold: 0.5
     });
 
-}, {
-    threshold: 0.5
-});
-
-counters.forEach(counter => counterObserver.observe(counter));
+    counters.forEach(counter => counterObserver.observe(counter));
 
 });
 
@@ -263,10 +263,10 @@ window.addEventListener("load", () => {
 ====================================== */
 
 console.log("%c🏗 RV Constructions & Consultancy",
-"color:#D4AF37;font-size:20px;font-weight:bold;");
+    "color:#D4AF37;font-size:20px;font-weight:bold;");
 
 console.log("%cWebsite Developed by Mithun R.",
-"color:white;font-size:14px;");
+    "color:white;font-size:14px;");
 
 
 
@@ -279,7 +279,7 @@ const contactForm = document.getElementById("contactForm");
 
 if (contactForm) {
 
-    contactForm.addEventListener("submit", function(e){
+    contactForm.addEventListener("submit", function (e) {
 
         e.preventDefault();
 
@@ -289,7 +289,7 @@ if (contactForm) {
         const message = document.getElementById("message").value;
 
         const text =
-`Hello RV Constructions,
+            `Hello RV Constructions,
 
 Name: ${name}
 Email: ${email}
