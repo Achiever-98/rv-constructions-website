@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rv-constructions
+  namespace: rv-constructions
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: rv-constructions
+
+  template:
+    metadata:
+      labels:
+        app: rv-constructions
+
+    spec:
+      containers:
+      - name: rv-constructions
+
+        image: achievermithu/rv-constructions:latest
+
+        imagePullPolicy: Always
+
+        ports:
+        - containerPort: 80

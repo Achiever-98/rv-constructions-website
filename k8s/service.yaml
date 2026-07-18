@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rv-constructions-service
+  namespace: rv-constructions
+
+spec:
+  selector:
+    app: rv-constructions
+
+  ports:
+  - port: 80
+    targetPort: 80
+
+  type: NodePort

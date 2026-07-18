@@ -117,6 +117,27 @@ pipeline {
             }
         }
 
+        stage('Verify Docker Image') {
+            steps {
+                sh '''
+                    docker images | grep rv-constructions
+                '''
+            }
+        }
+
+        stage('Trivy Security Scan') {
+            steps {
+                sh '''
+                    docker run --rm \
+                    -v /var/run/docker.sock:/var/run/docker.sock \
+                    aquasec/trivy:latest image \
+                    --severity HIGH,CRITICAL \
+                    --exit-code 1 \
+                    rv-constructions:${BUILD_NUMBER}
+                '''
+            }
+        }
+
         stage('Push Docker Image') {
             steps {
                 withCredentials([usernamePassword(
@@ -141,13 +162,7 @@ pipeline {
         }
 
 
-        stage('Verify Docker Image') {
-            steps {
-                sh '''
-                    docker images | grep rv-constructions
-                '''
-            }
-        }
+        
 
         stage('Run Docker Container') {
             steps {
