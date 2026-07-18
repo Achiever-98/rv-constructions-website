@@ -135,8 +135,7 @@ pipeline {
                     -p 8082:80 \
                     rv-constructions:${BUILD_NUMBER}
 
-                    echo ""
-                    docker ps || true
+                    docker ps
                 '''
             }
         }
@@ -146,7 +145,9 @@ pipeline {
                 sh '''
                     echo "Waiting for application..."
 
-                    for i in {1..15}
+                    i=1
+
+                    while [ $i -le 15 ]
                     do
                         if curl -f http://host.docker.internal:8082 >/dev/null 2>&1
                         then
@@ -156,17 +157,18 @@ pipeline {
 
                         echo "Retry $i..."
                         sleep 2
+
+                        i=$((i+1))
                     done
 
                     echo "Application failed to start"
 
                     docker logs rv-constructions
 
-                    exit 1
-                '''
+                exit 1
+            '''
             }
         }
-
 
     }
 
@@ -185,6 +187,5 @@ pipeline {
                 '''
                 cleanWs()
             }
-        }
-
+    }
     }
