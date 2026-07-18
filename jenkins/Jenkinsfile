@@ -144,7 +144,6 @@ pipeline {
                     usernameVariable: 'DOCKER_USER',
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
-
                     sh '''
                         echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
 
@@ -163,6 +162,8 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 sh '''
+                    sed -i 's/\${BUILD_NUMBER}/${BUILD_NUMBER}/g' k8s/deployment.yaml
+
                     kubectl apply -f k8s/namespace.yaml
                     kubectl apply -f k8s/deployment.yaml
                     kubectl apply -f k8s/service.yaml
@@ -177,8 +178,23 @@ pipeline {
             }
         }
 
+        stage('Kubernetes Health Check') {
+            steps {
+                sh '''
+                kubectl get pods -n rv-constructions
+                kubectl get svc -n rv-constructions
+                kubectl get deployment -n rv-constructions
+            '''
+            }
+        }
 
-        
+        stage('Verify Rollout') {
+            steps {
+                sh '''
+                    kubectl rollout status deployment/rv-constructions -n rv-constructions
+                '''
+            }
+        }
 
         stage('Run Docker Container') {
             steps {
@@ -224,7 +240,6 @@ pipeline {
             '''
             }
         }
-
     }
 
     post {
