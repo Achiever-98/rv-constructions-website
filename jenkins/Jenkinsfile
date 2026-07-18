@@ -117,6 +117,30 @@ pipeline {
             }
         }
 
+        stage('Push Docker Image') {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+
+                    sh '''
+                        echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+
+                        docker tag rv-constructions:${BUILD_NUMBER} $DOCKER_USER/rv-constructions:${BUILD_NUMBER}
+                        docker tag rv-constructions:${BUILD_NUMBER} $DOCKER_USER/rv-constructions:latest
+
+                        docker push $DOCKER_USER/rv-constructions:${BUILD_NUMBER}
+                        docker push $DOCKER_USER/rv-constructions:latest
+
+                        docker logout
+                    '''
+                }
+            }
+        }
+
+
         stage('Verify Docker Image') {
             steps {
                 sh '''
