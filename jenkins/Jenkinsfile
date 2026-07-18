@@ -6,22 +6,29 @@ pipeline {
     }
 
     stages {
-        stage('Print Workspace') {
+        stage('Checkout') {
             steps {
-                sh '''
-                    echo "Current Directory:"
-                    pwd
-
-                    echo ""
-                    echo "Workspace Files:"
-                    ls -la
-
-                    echo ""
-                    echo "App Folder:"
-                    ls -la app
-                '''
+                checkout scm
             }
         }
+
+    // stages {
+    //     stage('Print Workspace') {
+    //         steps {
+    //             sh '''
+    //                 echo "Current Directory:"
+    //                 pwd
+
+    //                 echo ""
+    //                 echo "Workspace Files:"
+    //                 ls -la
+
+    //                 echo ""
+    //                 echo "App Folder:"
+    //                 ls -la app
+    //             '''
+    //         }
+    //     }
 
         stage('HTML Validation') {
             steps {
@@ -104,7 +111,16 @@ pipeline {
                 sh '''
                     docker build \
                     -f docker/Dockerfile \
-                    -t rv-constructions:${BUILD_NUMBER} .
+                    -t rv-constructions:${BUILD_NUMBER} \
+                    -t rv-constructions:latest .
+                '''
+            }
+        }
+
+        stage('Verify Docker Image') {
+            steps {
+                sh '''
+                    docker images | grep rv-constructions
                 '''
             }
         }
@@ -121,5 +137,40 @@ pipeline {
                 '''
             }
         }
+
+        stage('Health Check') {
+            steps {
+                sh '''
+                    for i in {1..10}
+                    do
+                        if curl -f http://localhost:8082
+                        then
+                            exit 0
+                    fi
+
+                    sleep 2
+                done
+
+                exit 1
+            '''
+            }
+        }
+
+        post {
+            success {
+                echo 'Deployment Successful'
+            }
+
+            failure {
+                echo 'Deployment Failed'
+            }
+
+            always {
+                sh '''
+                docker image prune -f
+                '''
+                cleanWs()
+            }
+        }
     }
-}
+    }
