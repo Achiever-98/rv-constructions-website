@@ -159,10 +159,22 @@ pipeline {
             }
         }
 
+        stage('Check Kubernetes Config') {
+            steps {
+                sh '''
+                    echo "KUBECONFIG=$KUBECONFIG"
+
+                    kubectl config view
+
+                    kubectl get nodes
+                '''
+            }
+        }
+
+
         stage('Deploy to Kubernetes') {
             steps {
                 sh '''
-                    sed -i 's/\${BUILD_NUMBER}/${BUILD_NUMBER}/g' k8s/deployment.yaml
 
                     kubectl apply -f k8s/namespace.yaml
                     kubectl apply -f k8s/deployment.yaml
