@@ -274,11 +274,11 @@ pipeline {
                 echo 'Deployment Failed'
             }
 
-            always {
-                sh '''
-                docker image prune -f
-                '''
-                cleanWs()
-            }
+            // always {
+            //     sh '''
+            //     docker image prune -f
+            //     '''
+            //     cleanWs()
+            // }
     }
     }
