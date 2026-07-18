@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: rv-constructions-service
+  namespace: {{ .Values.namespace }}
+
+spec:
+  selector:
+    app: rv-constructions
+
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort }}
+
+  type: {{ .Values.service.type }}
