@@ -156,7 +156,10 @@ pipeline {
             }
         }
 
-        post {
+
+    }
+
+    post {
             success {
                 echo 'Deployment Successful'
             }
@@ -172,5 +175,5 @@ pipeline {
                 cleanWs()
             }
         }
-    }
+
     }
