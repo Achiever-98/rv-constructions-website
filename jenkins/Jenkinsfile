@@ -148,7 +148,7 @@ pipeline {
 
                     for i in {1..15}
                     do
-                        if curl -f http://localhost:8082 >/dev/null 2>&1
+                        if curl -f http://host.docker.internal:8082 >/dev/null 2>&1
                         then
                             echo "Application is UP"
                             exit 0
