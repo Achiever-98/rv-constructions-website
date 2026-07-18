@@ -171,40 +171,51 @@ pipeline {
             }
         }
 
-
         stage('Deploy to Kubernetes') {
             steps {
-                sh '''
+                withCredentials([
+                    file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')
+                ]) {
+                    sh '''
+                        kubectl get nodes
 
-                    kubectl apply -f k8s/namespace.yaml
-                    kubectl apply -f k8s/deployment.yaml
-                    kubectl apply -f k8s/service.yaml
+                        sed -i 's/${BUILD_NUMBER}/'"${BUILD_NUMBER}"'/g' k8s/deployment.yaml
 
-                    kubectl set image deployment/rv-constructions \
-                    rv-constructions=achievermithu/rv-constructions:${BUILD_NUMBER} \
-                    -n rv-constructions
+                        kubectl apply -f k8s/namespace.yaml
+                        kubectl apply -f k8s/deployment.yaml
+                        kubectl apply -f k8s/service.yaml
 
-                    kubectl rollout status deployment/rv-constructions \
-                    -n rv-constructions
-                '''
+                        kubectl rollout status deployment/rv-constructions \
+                        -n rv-constructions
+                    '''
+                }
             }
         }
 
         stage('Kubernetes Health Check') {
             steps {
-                sh '''
-                kubectl get pods -n rv-constructions
-                kubectl get svc -n rv-constructions
-                kubectl get deployment -n rv-constructions
-            '''
+                withCredentials([
+                    file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')
+                ]) {
+                    sh '''
+                        kubectl get pods -n rv-constructions
+                        kubectl get svc -n rv-constructions
+                        kubectl get deployment -n rv-constructions
+                    '''
+                }
             }
         }
 
         stage('Verify Rollout') {
             steps {
-                sh '''
-                    kubectl rollout status deployment/rv-constructions -n rv-constructions
-                '''
+                withCredentials([
+                    file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')
+                ]) {
+                    sh '''
+                        kubectl rollout status deployment/rv-constructions \
+                        -n rv-constructions
+                    '''
+                }
             }
         }
 
